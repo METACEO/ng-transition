@@ -5,8 +5,11 @@
   "scripts": {
     "ng": "ng",
     "nx": "nx",
-    "start": "ng serve",
+    "start": "node dist/apps/ng-transition-demo/server/main.js",
+    "start:dev": "ng serve",
+    "start:dev:ssr": "ng run ng-transition-demo:serve-ssr",
     "build": "ng build",
+    "heroku-postbuild": "ng build --prod && ng run ng-transition-demo:server:production",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
@@ -26,9 +29,6 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "dev:ssr": "ng run ng-transition-demo:serve-ssr",
-    "serve:ssr": "node dist/ng-transition-demo/server/main.js",
-    "build:ssr": "ng build --prod && ng run ng-transition-demo:server:production",
     "prerender": "ng run ng-transition-demo:prerender"
   },
   "private": true,

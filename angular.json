@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-transition-demo/browser",
+            "outputPath": "dist/apps/ng-transition-demo/browser",
             "index": "apps/ng-transition-demo/src/index.html",
             "main": "apps/ng-transition-demo/src/main.ts",
             "polyfills": "apps/ng-transition-demo/src/polyfills.ts",
@@ -98,7 +98,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/ng-transition-demo/server",
+            "outputPath": "dist/apps/ng-transition-demo/server",
             "main": "apps/ng-transition-demo/server.ts",
             "tsConfig": "apps/ng-transition-demo/tsconfig.server.json"
           },
