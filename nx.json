@@ -25,6 +25,9 @@
     "ng-transition-demo-e2e": {
       "tags": [],
       "implicitDependencies": ["ng-transition-demo"]
+    },
+    "ng-transition": {
+      "tags": []
     }
   }
 }
