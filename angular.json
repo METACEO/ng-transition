@@ -134,9 +134,7 @@
           "options": {
             "browserTarget": "ng-transition-demo:build:production",
             "serverTarget": "ng-transition-demo:server:production",
-            "routes": [
-              "/"
-            ]
+            "routes": ["/"]
           },
           "configurations": {
             "production": {}
