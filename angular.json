@@ -15,7 +15,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/ng-transition-demo",
+            "outputPath": "dist/apps/ng-transition-demo/browser",
             "index": "apps/ng-transition-demo/src/index.html",
             "main": "apps/ng-transition-demo/src/main.ts",
             "polyfills": "apps/ng-transition-demo/src/polyfills.ts",
@@ -93,6 +93,51 @@
             "tsConfig": "apps/ng-transition-demo/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "apps/ng-transition-demo/src/test-setup.ts"
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/apps/ng-transition-demo/server",
+            "main": "apps/ng-transition-demo/server.ts",
+            "tsConfig": "apps/ng-transition-demo/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/ng-transition-demo/src/environments/environment.ts",
+                  "with": "apps/ng-transition-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "ng-transition-demo:build",
+            "serverTarget": "ng-transition-demo:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-transition-demo:build:production",
+              "serverTarget": "ng-transition-demo:server:production"
+            }
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "ng-transition-demo:build:production",
+            "serverTarget": "ng-transition-demo:server:production",
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }
