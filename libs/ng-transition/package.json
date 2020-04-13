@@ -1,6 +1,33 @@
 {
-  "name": "@ng-transition/ng-transition",
+  "name": "ng-transition",
   "version": "0.0.1",
+  "description": "Transition elements via classes like you would in the Vue and Alpine.js libraries.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/METACEO/ng-transition.git"
+  },
+  "author": {
+    "name": "James Allen",
+    "email": "the@spiciest.dev",
+    "url": "https://the.spiciest.dev"
+  },
+  "keywords": [
+    "ng-transition",
+    "angular",
+    "class",
+    "classes",
+    "transition",
+    "x-transition",
+    "nx"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/METACEO/ng-transition/issues"
+  },
+  "homepage": "https://github.com/METACEO/ng-transition#readme",
+  "dependencies": {
+    "ng-refs": "^0.3.1"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
     "@angular/core": "^9.1.0",
