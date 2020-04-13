@@ -3,6 +3,8 @@
 // https://github.com/alpinejs/alpine/blob/master/src/utils.js
 //
 
+import { AnimationFrameRef, GetComputedStyleRef, TimeoutRef } from 'ng-refs';
+
 interface Stages {
   start: () => void;
   during: () => void;
@@ -13,6 +15,9 @@ interface Stages {
 }
 
 export function transitionClasses(
+  animationFrameRef: AnimationFrameRef,
+  getComputedStyleRef: GetComputedStyleRef,
+  timeoutRef: TimeoutRef,
   el: HTMLElement,
   classesDuring: string[],
   classesStart: string[],
@@ -20,7 +25,11 @@ export function transitionClasses(
   hook1: (...unknown) => unknown,
   hook2: (...unknown) => unknown
 ) {
-  transition(el, {
+  transition(
+    animationFrameRef,
+    getComputedStyleRef,
+    timeoutRef,
+    el, {
     start() {
       el.classList.add(...classesStart);
     },
@@ -44,15 +53,21 @@ export function transitionClasses(
   });
 }
 
-export function transition(el: HTMLElement, stages: Stages) {
+export function transition(
+  animationFrameRef: AnimationFrameRef,
+  getComputedStyleRef: GetComputedStyleRef,
+  timeoutRef: TimeoutRef,
+  el: HTMLElement,
+  stages: Stages
+) {
   stages.start();
   stages.during();
 
-  requestAnimationFrame(() => {
+  animationFrameRef.nativeRequest(() => {
     // Note: Safari's transitionDuration property will list out comma separated
     // transition durations for every single transition property. Let's grab the
     // first one and call it a day.
-    const { transitionDuration } = getComputedStyle(el);
+    const { transitionDuration } = getComputedStyleRef.native(el);
     const durationString = transitionDuration
       .replace(/,.*/, '')
       .replace('s', '');
@@ -60,10 +75,10 @@ export function transition(el: HTMLElement, stages: Stages) {
 
     stages.show();
 
-    requestAnimationFrame(() => {
+    animationFrameRef.nativeRequest(() => {
       stages.end();
 
-      setTimeout(() => {
+      timeoutRef.nativeSet(() => {
         stages.hide();
 
         // Adding an "isConnected" check, in case the callback

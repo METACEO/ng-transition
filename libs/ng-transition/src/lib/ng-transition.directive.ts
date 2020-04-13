@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import { transitionClasses } from './transition-classes';
+import { AnimationFrameRef, GetComputedStyleRef, TimeoutRef } from 'ng-refs';
 
 const NOOP = () => void 0;
 
@@ -29,6 +30,9 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
   private _ngTransitionLeaveEnd: string[] = [];
 
   constructor(
+    private readonly animationFrameRef: AnimationFrameRef,
+    private readonly getComputedStyleRef: GetComputedStyleRef,
+    private readonly timeoutRef: TimeoutRef,
     private readonly _viewContainer: ViewContainerRef,
     private readonly templateRef: TemplateRef<NgIfContext<T>>
   ) {
@@ -100,6 +104,9 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
       this._context
     );
     transitionClasses(
+      this.animationFrameRef,
+      this.getComputedStyleRef,
+      this.timeoutRef,
       this._thenViewRef.rootNodes[0],
       this._ngTransitionEnter,
       this._ngTransitionEnterStart,
@@ -114,6 +121,9 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
       return;
     }
     transitionClasses(
+      this.animationFrameRef,
+      this.getComputedStyleRef,
+      this.timeoutRef,
       this._thenViewRef.rootNodes[0],
       this._ngTransitionLeave,
       this._ngTransitionLeaveStart,

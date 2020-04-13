@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TimeoutRef } from 'ng-refs';
 
 @Component({
   selector: 'ng-transition-root',
@@ -8,8 +9,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public opened = true;
 
+  constructor(private readonly timeoutRef: TimeoutRef) {
+  }
+
   public closeModal(): void {
     this.opened = false;
-    setTimeout(() => (this.opened = true), 1000);
+    this.timeoutRef.nativeSet(() => (this.opened = true), 1000);
   }
 }
