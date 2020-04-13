@@ -4,14 +4,16 @@
   ngTransitionEnter="duration-300"
   ngTransitionLeave="duration-200"
 >
-  <div class="fixed inset-0 transition-opacity"
-       *ngTransition="opened"
-       ngTransitionEnter="ease-out duration-300"
-       ngTransitionEnterStart="opacity-0"
-       ngTransitionEnterEnd="opacity-100"
-       ngTransitionLeave="ease-in duration-200"
-       ngTransitionLeaveStart="opacity-100"
-       ngTransitionLeaveEnd="opacity-0">
+  <div
+    class="fixed inset-0 transition-opacity"
+    *ngTransition="opened"
+    ngTransitionEnter="ease-out duration-300"
+    ngTransitionEnterStart="opacity-0"
+    ngTransitionEnterEnd="opacity-100"
+    ngTransitionLeave="ease-in duration-200"
+    ngTransitionLeaveStart="opacity-100"
+    ngTransitionLeaveEnd="opacity-0"
+  >
     <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
   </div>
 

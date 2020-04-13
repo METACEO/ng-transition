@@ -12,12 +12,14 @@ interface Stages {
   cleanup: () => void;
 }
 
-export function transitionClasses(el: HTMLElement,
-                                  classesDuring: string[],
-                                  classesStart: string[],
-                                  classesEnd: string[],
-                                  hook1: (...unknown) => unknown,
-                                  hook2: (...unknown) => unknown) {
+export function transitionClasses(
+  el: HTMLElement,
+  classesDuring: string[],
+  classesStart: string[],
+  classesEnd: string[],
+  hook1: (...unknown) => unknown,
+  hook2: (...unknown) => unknown
+) {
   transition(el, {
     start() {
       el.classList.add(...classesStart);
@@ -42,8 +44,7 @@ export function transitionClasses(el: HTMLElement,
   });
 }
 
-export function transition(el: HTMLElement,
-                           stages: Stages) {
+export function transition(el: HTMLElement, stages: Stages) {
   stages.start();
   stages.during();
 
@@ -52,7 +53,9 @@ export function transition(el: HTMLElement,
     // transition durations for every single transition property. Let's grab the
     // first one and call it a day.
     const { transitionDuration } = getComputedStyle(el);
-    const durationString = transitionDuration.replace(/,.*/, '').replace('s', '');
+    const durationString = transitionDuration
+      .replace(/,.*/, '')
+      .replace('s', '');
     const duration = Number(durationString) * 1000;
 
     stages.show();
