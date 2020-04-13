@@ -1,5 +1,11 @@
 import { NgIfContext } from '@angular/common';
-import { Directive, EmbeddedViewRef, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  EmbeddedViewRef,
+  Input,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
 
 @Directive({
   selector: '[ngTransition]'
@@ -9,8 +15,10 @@ export class NgTransitionDirective<T = unknown> {
   private _thenTemplateRef: TemplateRef<NgIfContext<T>> | null = null;
   private _thenViewRef: EmbeddedViewRef<NgIfContext<T>> | null = null;
 
-  constructor(private readonly _viewContainer: ViewContainerRef,
-              private readonly templateRef: TemplateRef<NgIfContext<T>>) {
+  constructor(
+    private readonly _viewContainer: ViewContainerRef,
+    private readonly templateRef: TemplateRef<NgIfContext<T>>
+  ) {
     this._thenTemplateRef = templateRef;
   }
 
@@ -36,14 +44,16 @@ export class NgTransitionDirective<T = unknown> {
       this._thenViewRef.destroy();
       this._thenViewRef = null;
     }
-    this._thenViewRef = this._viewContainer.createEmbeddedView(this._thenTemplateRef, this._context);
+    this._thenViewRef = this._viewContainer.createEmbeddedView(
+      this._thenTemplateRef,
+      this._context
+    );
   }
-
 
   private hide(): void {
     if (!this._thenViewRef) {
       return;
     }
-    this._viewContainer.clear()
+    this._viewContainer.clear();
   }
 }

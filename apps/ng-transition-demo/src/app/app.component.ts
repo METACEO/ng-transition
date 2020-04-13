@@ -10,6 +10,6 @@ export class AppComponent {
 
   public closeModal(): void {
     this.opened = false;
-    setTimeout(() => this.opened = true, 1000);
+    setTimeout(() => (this.opened = true), 1000);
   }
 }
