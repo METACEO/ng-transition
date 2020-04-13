@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-transition/ng-transition": ["libs/ng-transition/src/index.ts"]
+      "ng-transition": ["libs/ng-transition/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
