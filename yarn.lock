@@ -7986,6 +7986,11 @@ ng-packagr@^9.0.0:
     terser "^4.3.8"
     update-notifier "^4.0.0"
 
+ng-refs@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/ng-refs/-/ng-refs-0.3.1.tgz#794816015f6332a7cf465de1f51e225841748650"
+  integrity sha512-zYZZqwGOZpo8IuEzDXifu7DehqiTEadrw6CEin8KubWvvxno/ES8k95lDaB7zOc+GD9565S8Stx/8C3ItPO1tQ==
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
