@@ -6,8 +6,5 @@
     "umdModuleIds": {
       "ng-refs": "ng-refs"
     }
-  },
-  "whitelistedNonPeerDependencies": [
-    "ng-refs"
-  ]
+  }
 }
