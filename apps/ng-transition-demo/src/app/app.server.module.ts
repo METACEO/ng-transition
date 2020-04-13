@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
       provide: AnimationFrameRef,
       useValue: {
         nativeCancel: () => void 0,
-        nativeRequest: () => void 0,
+        nativeRequest: () => void 0
       }
     }
   ],

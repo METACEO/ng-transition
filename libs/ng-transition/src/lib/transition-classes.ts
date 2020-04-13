@@ -25,11 +25,7 @@ export function transitionClasses(
   hook1: (...unknown) => unknown,
   hook2: (...unknown) => unknown
 ) {
-  transition(
-    animationFrameRef,
-    getComputedStyleRef,
-    timeoutRef,
-    el, {
+  transition(animationFrameRef, getComputedStyleRef, timeoutRef, el, {
     start() {
       el.classList.add(...classesStart);
     },

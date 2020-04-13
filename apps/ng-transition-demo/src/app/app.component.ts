@@ -9,8 +9,7 @@ import { TimeoutRef } from 'ng-refs';
 export class AppComponent {
   public opened = true;
 
-  constructor(private readonly timeoutRef: TimeoutRef) {
-  }
+  constructor(private readonly timeoutRef: TimeoutRef) {}
 
   public closeModal(): void {
     this.opened = false;
