@@ -1,6 +1,6 @@
 {
   "name": "ng-transition",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Transition elements via classes like you would in the Vue and Alpine.js libraries.",
   "repository": {
     "type": "git",

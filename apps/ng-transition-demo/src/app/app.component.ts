@@ -1,5 +1,4 @@
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { TimeoutRef } from 'ng-refs';
 
 @Component({
   selector: 'ng-transition-root',
@@ -13,8 +12,6 @@ export class AppComponent {
 
   @ViewChild('Profile')
   public $profile: ElementRef<HTMLDivElement>;
-
-  constructor(private readonly timeoutRef: TimeoutRef) {}
 
   @HostListener('click', ['$event'])
   public handleAutomaticUserPopoutClose($event) {
@@ -32,9 +29,11 @@ export class AppComponent {
     }
   }
 
+  public openModal(): void {
+    this.opened = true;
+  }
   public closeModal(): void {
     this.opened = false;
-    // this.timeoutRef.nativeSet(() => (this.opened = true), 1000);
   }
   public toggleLeftNav(): void {
     this.openedLeftNav = !this.openedLeftNav;
