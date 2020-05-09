@@ -1,17 +1,8 @@
 import { NgIfContext } from '@angular/common';
-import {
-  Directive,
-  EmbeddedViewRef,
-  Input,
-  OnInit,
-  TemplateRef,
-  ViewContainerRef
-} from '@angular/core';
-
-import { transitionClasses } from './transition-classes';
+import { Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { AnimationFrameRef, GetComputedStyleRef, TimeoutRef } from 'ng-refs';
 
-const NOOP = () => void 0;
+import { transitionClasses } from './transition-classes';
 
 @Directive({
   selector: '[ngTransition]'
@@ -19,8 +10,6 @@ const NOOP = () => void 0;
 export class NgTransitionDirective<T = unknown> implements OnInit {
   private _context: NgIfContext<T> = new NgIfContext<T>();
   private _init = false;
-  private _thenTemplateRef: TemplateRef<NgIfContext<T>> | null = null;
-  private _thenViewRef: EmbeddedViewRef<NgIfContext<T>> | null = null;
 
   private _ngTransitionEnter: string[] = [];
   private _ngTransitionEnterStart: string[] = [];
@@ -33,15 +22,13 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
     private readonly animationFrameRef: AnimationFrameRef,
     private readonly getComputedStyleRef: GetComputedStyleRef,
     private readonly timeoutRef: TimeoutRef,
-    private readonly _viewContainer: ViewContainerRef,
-    private readonly templateRef: TemplateRef<NgIfContext<T>>
+    private readonly _viewContainer: ViewContainerRef
   ) {
-    this._thenTemplateRef = templateRef;
   }
 
   ngOnInit(): void {
     this._init = true;
-    this._updateView();
+    this._updateView(true);
   }
 
   @Input()
@@ -80,11 +67,14 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
     this._ngTransitionLeaveEnd = ngTransitionLeaveEnd.split(' ');
   }
 
-  private _updateView() {
+  private _updateView(isFirst = false) {
     if (!this._init) {
       return;
     }
-    if (this._context.$implicit) {
+    const show = this._context.$implicit;
+    if (isFirst) {
+      this.setTargetElementDisplay(show ? '' : 'none');
+    } else if (show) {
       this.show();
     } else {
       this.hide();
@@ -92,44 +82,41 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
   }
 
   private show(): void {
-    if (!this._thenTemplateRef) {
-      return;
-    }
-    if (this._thenViewRef) {
-      this._thenViewRef.destroy();
-      this._thenViewRef = null;
-    }
-    this._thenViewRef = this._viewContainer.createEmbeddedView(
-      this._thenTemplateRef,
-      this._context
-    );
+    this.setTargetElementDisplay('');
     transitionClasses(
       this.animationFrameRef,
       this.getComputedStyleRef,
       this.timeoutRef,
-      this._thenViewRef.rootNodes[0],
+      this.getTargetElement(),
       this._ngTransitionEnter,
       this._ngTransitionEnterStart,
       this._ngTransitionEnterEnd,
-      NOOP,
-      NOOP
+      () => void 0
     );
   }
 
   private hide(): void {
-    if (!this._thenViewRef) {
-      return;
-    }
     transitionClasses(
       this.animationFrameRef,
       this.getComputedStyleRef,
       this.timeoutRef,
-      this._thenViewRef.rootNodes[0],
+      this.getTargetElement(),
       this._ngTransitionLeave,
       this._ngTransitionLeaveStart,
       this._ngTransitionLeaveEnd,
-      NOOP,
-      () => this._viewContainer.clear()
+      () => this.setTargetElementDisplay('none')
     );
   }
+
+  private getTargetElement(): HTMLElement {
+    return this._viewContainer?.element?.nativeElement ?? null;
+  }
+
+  private setTargetElementDisplay(value: string): void {
+    const targetElement = this.getTargetElement();
+    if (targetElement?.style) {
+      targetElement.style.display = value;
+    }
+  }
+
 }
