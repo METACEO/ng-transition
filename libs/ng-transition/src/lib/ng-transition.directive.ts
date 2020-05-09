@@ -23,8 +23,7 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
     private readonly getComputedStyleRef: GetComputedStyleRef,
     private readonly timeoutRef: TimeoutRef,
     private readonly _viewContainer: ViewContainerRef
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this._init = true;
@@ -118,5 +117,4 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
       targetElement.style.display = value;
     }
   }
-
 }
