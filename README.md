@@ -1,84 +1,69 @@
-# NgTransition
+# ng-transition
 
-This project was generated using [Nx](https://nx.dev).
+> Transition elements via classes like you would in the Vue and Alpine.js libraries.
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+Click [here](https://ng-transition.herokuapp.com/) for a demo app, via Heroku. You can also find the code of this demo in the `apps/ng-transition-demo` folder of this repository.
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+## Install
 
-## Quick Start & Documentation
+Download `ng-transition` into your Angular project via [NPM](https://www.npmjs.com/package/ng-transition) or [Yarn](https://yarnpkg.com/package/ng-transition):
 
-[Nx Documentation](https://nx.dev/angular)
+```shell script
+# NPM
+npm install ng-transition
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+# Yarn
+yarn add ng-transition
+```
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+## Basic Use
 
-## Adding capabilities to your workspace
+Similar to the modal example found in this repository's demo app, an example modal in your code may look something like the below snippet.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+The below is a mixture of custom classes and TailwindCSS utilities. Your transition classes can be totally customized in your CSS or SCSS files, or they can be utility functions like our example.
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```html
+<!-- We want the entire container to wait to hide before leaving,  -->
+<!-- therefore we will specify a `ngTransitionLeave` value that is -->
+<!-- also tied to the `openedModal` value.                         -->
+<div
+  class="modal-container"
+  [ngTransition]="openedModal"
+  ngTransitionEnter="duration-300"
+  ngTransitionLeave="duration-200"
+>
+  <div
+    class="modal-backdrop"
+    [ngTransition]="openedModal"
+    ngTransitionEnter="ease-out duration-300"
+    ngTransitionEnterStart="opacity-0"
+    ngTransitionEnterEnd="opacity-100"
+    ngTransitionLeave="ease-in duration-200"
+    ngTransitionLeaveStart="opacity-100"
+    ngTransitionLeaveEnd="opacity-0"
+  >
+    <div class="modal-backdrop-mask"></div>
+  </div>
 
-Below are some plugins which you can add to your workspace:
+  <div
+    class="modal-content"
+    [ngTransition]="openedModal"
+    ngTransitionEnter="ease-out duration-300"
+    ngTransitionEnterStart="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+    ngTransitionEnterEnd="opacity-100 translate-y-0 sm:scale-100"
+    ngTransitionLeave="ease-in duration-200"
+    ngTransitionLeaveStart="opacity-100 translate-y-0 sm:scale-100"
+    ngTransitionLeaveEnd="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+  >
+    ...
+  </div>
+</div>
+```
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+## Angular Universal
 
-## Generate an application
+Depending on the Alpine.js source directly resulted in errors when rendering Angular server-side. Find the example server module in the `apps/ng-transition-demo/src/app` folder to see how we replace problematic browser APIs with server-side friendly implementations via the `ng-refs` package.
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+**If you see the below error when rendering Angular server-side, find our Dependency Injection solution in the aforementioned folder.**
 
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@ng-transition/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+![Angular Universal error with requestAnimationFrame](https://raw.githubusercontent.com/METACEO/ng-transition/master/README-ssr-browser-api-errors.jpg)
