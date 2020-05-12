@@ -1,4 +1,5 @@
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { TimeoutRef } from 'ng-refs';
 
 @Component({
   selector: 'ng-transition-root',
@@ -7,8 +8,10 @@ import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 })
 export class AppComponent {
   opened = true;
+  openedFastToggle = false;
   openedLeftNav = false;
   openedProfile = false;
+  fastTogglesRemaining = 0;
 
   @ViewChild('Profile')
   public $profile: ElementRef<HTMLDivElement>;
@@ -27,6 +30,20 @@ export class AppComponent {
     if (!$profile.contains($target)) {
       this.openedProfile = false;
     }
+  }
+
+  constructor(readonly timeoutRef: TimeoutRef) {
+  }
+
+  public experimentFastToggle(remaining = 50): void {
+    this.fastTogglesRemaining = remaining;
+    if (!remaining) {
+      return;
+    }
+    this.timeoutRef.nativeSet(() => {
+      this.openedFastToggle = !this.openedFastToggle;
+      this.experimentFastToggle(--remaining);
+    }, 75);
   }
 
   public openModal(): void {
