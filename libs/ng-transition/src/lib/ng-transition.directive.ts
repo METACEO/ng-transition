@@ -10,6 +10,7 @@ import { transitionClasses } from './transition-classes';
 export class NgTransitionDirective<T = unknown> implements OnInit {
   private _context: NgIfContext<T> = new NgIfContext<T>();
   private _init = false;
+  private _transitioning = false;
 
   private _ngTransitionEnter: string[] = [];
   private _ngTransitionEnterStart: string[] = [];
@@ -70,6 +71,9 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
     if (!this._init) {
       return;
     }
+    if (this._transitioning) {
+      return;
+    }
     const show = this._context.$implicit;
     if (isFirst) {
       this.setTargetElementDisplay(show ? '' : 'none');
@@ -81,6 +85,7 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
   }
 
   private show(): void {
+    this._transitioning = true;
     this.setTargetElementDisplay('');
     transitionClasses(
       this.animationFrameRef,
@@ -90,11 +95,18 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
       this._ngTransitionEnter,
       this._ngTransitionEnterStart,
       this._ngTransitionEnterEnd,
-      () => void 0
+      () => {
+        if (this._context.$implicit) {
+          this._transitioning = false;
+        } else {
+          this.hide();
+        }
+      }
     );
   }
 
   private hide(): void {
+    this._transitioning = true;
     transitionClasses(
       this.animationFrameRef,
       this.getComputedStyleRef,
@@ -103,7 +115,14 @@ export class NgTransitionDirective<T = unknown> implements OnInit {
       this._ngTransitionLeave,
       this._ngTransitionLeaveStart,
       this._ngTransitionLeaveEnd,
-      () => this.setTargetElementDisplay('none')
+      () => {
+        this.setTargetElementDisplay('none');
+        if (this._context.$implicit) {
+          this.show();
+        } else {
+          this._transitioning = false;
+        }
+      }
     );
   }
 
