@@ -32,8 +32,7 @@ export class AppComponent {
     }
   }
 
-  constructor(readonly timeoutRef: TimeoutRef) {
-  }
+  constructor(readonly timeoutRef: TimeoutRef) {}
 
   public experimentFastToggle(remaining = 50): void {
     this.fastTogglesRemaining = remaining;

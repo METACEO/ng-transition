@@ -324,7 +324,10 @@
               This project is open source - be sure to star it!
             </span>
             <span class="block sm:ml-2 sm:inline-block">
-              <a href="https://github.com/METACEO/ng-transition" class="text-white font-bold underline">
+              <a
+                href="https://github.com/METACEO/ng-transition"
+                class="text-white font-bold underline"
+              >
                 See the source code &rarr;
               </a>
             </span>
@@ -476,11 +479,14 @@
                   [disabled]="fastTogglesRemaining"
                   (click)="experimentFastToggle()"
                 >
-                  <ng-container *ngIf="fastTogglesRemaining else DefaultFastToggling">
-                    {{fastTogglesRemaining}} toggles remaining...
+                  <ng-container
+                    *ngIf="fastTogglesRemaining; else DefaultFastToggling"
+                  >
+                    {{ fastTogglesRemaining }} toggles remaining...
                   </ng-container>
                   <ng-template #DefaultFastToggling>
-                    Click to start fast toggling of animation state: should be {{openedFastToggle ? 'opened' : 'closed'}}
+                    Click to start fast toggling of animation state: should be
+                    {{ openedFastToggle ? 'opened' : 'closed' }}
                   </ng-template>
                 </button>
               </span>
@@ -494,8 +500,16 @@
                     (click)="openedFastToggle = !this.openedFastToggle"
                   >
                     Options
-                    <svg class="-mr-1 ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    <svg
+                      class="-mr-1 ml-2 h-5 w-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      />
                     </svg>
                   </button>
                 </span>
@@ -512,10 +526,26 @@
               >
                 <div class="rounded-md bg-white shadow-xs">
                   <div class="py-1">
-                    <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">Account settings</a>
-                    <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">Support</a>
-                    <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">License</a>
-                    <a href="#" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900">Sign out</a>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                      >Account settings</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                      >Support</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                      >License</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                      >Sign out</a
+                    >
                   </div>
                 </div>
               </div>
