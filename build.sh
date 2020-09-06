@@ -14,4 +14,4 @@ yarn build ng-transition --prod
 
 echo Copy over README material
 cp ./README.md ./dist/libs/ng-transition
-cp ./README-ssr-browser-api-errors.png ./dist/libs/ng-transition
+cp ./README-ssr-browser-api-errors.jpg ./dist/libs/ng-transition
