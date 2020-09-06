@@ -38,7 +38,6 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
@@ -83,16 +82,14 @@
               "apps/ng-transition-demo/tsconfig.app.json",
               "apps/ng-transition-demo/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/ng-transition-demo/**"]
+            "exclude": ["**/node_modules/**", "!apps/ng-transition-demo/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/ng-transition-demo/jest.config.js",
-            "tsConfig": "apps/ng-transition-demo/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "apps/ng-transition-demo/src/test-setup.ts"
+            "passWithNoTests": true
           }
         },
         "server": {
@@ -164,7 +161,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/ng-transition-demo-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/ng-transition-demo-e2e/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/ng-transition-demo-e2e/**/*"
+            ]
           }
         }
       }
@@ -194,16 +194,14 @@
               "libs/ng-transition/tsconfig.lib.json",
               "libs/ng-transition/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ng-transition/**"]
+            "exclude": ["**/node_modules/**", "!libs/ng-transition/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ng-transition/jest.config.js",
-            "tsConfig": "libs/ng-transition/tsconfig.spec.json",
-            "passWithNoTests": true,
-            "setupFile": "libs/ng-transition/src/test-setup.ts"
+            "passWithNoTests": true
           }
         }
       },
