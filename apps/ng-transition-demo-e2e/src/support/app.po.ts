@@ -1,1 +1,1 @@
-export const getGreeting = () => cy.get('h1');
+export const getModalMessage = () => cy.get('div.modal p.modal-message');
