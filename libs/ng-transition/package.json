@@ -1,6 +1,6 @@
 {
   "name": "ng-transition",
-  "version": "1.0.1",
+  "version": "10.0.0",
   "description": "Transition elements via classes like you would in the Vue and Alpine.js libraries.",
   "repository": {
     "type": "git",
@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/METACEO/ng-transition#readme",
   "peerDependencies": {
-    "@angular/common": "^9.1.0",
-    "@angular/core": "^9.1.0",
-    "ng-refs": "^0.3.1"
+    "@angular/common": "^10.1.0",
+    "@angular/core": "^10.1.0",
+    "ng-refs": "^10.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
