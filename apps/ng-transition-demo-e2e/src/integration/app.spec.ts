@@ -4,6 +4,8 @@ describe('ng-transition-demo', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display a modal message', () => {
-    getModalMessage().contains('Are you sure you want to deactivate your account?');
+    getModalMessage().contains(
+      'Are you sure you want to deactivate your account?'
+    );
   });
 });
